@@ -10,6 +10,7 @@ export default {
 </script>
 <style>
   #app {
-    font-size: 16px
+    font-size: 16px;
+    padding: 10px;
   }
 </style>
