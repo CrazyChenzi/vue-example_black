@@ -15,9 +15,6 @@ export default {
     return {
       routerList: routers
     }
-  },
-  mounted () {
-    console.log(routers)
   }
 }
 </script>
