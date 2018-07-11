@@ -23,6 +23,10 @@
       </div>
     </Table>
 
+    <Tooltip content="点击复制到剪贴板" placement="bottom">
+      <p @click="copy($refs.copy)" class="copy" ref="copy">这是测试复制到剪贴板的指令</p>
+    </Tooltip>
+
     <Button @click="testAxios">点击请求远端json文件</Button>
     {{ axiosList }}
   </div>
@@ -84,17 +88,29 @@ export default {
       this.$axios.post("package.json").then(res => {
         this.axiosList = res.data
       })
+    },
+    copy (el) {
+      var range = document.createRange();
+			var end = el.childNodes.length;
+			range.setStart(el,0);
+			range.setEnd(el,end);
+			var selection = window.getSelection();
+			selection.removeAllRanges();
+			selection.addRange(range);
+			document.execCommand("copy",false,null);
+			selection.removeRange(range);
     }
   }
 };
 </script>
-<style scoped>
-  .footer-page {
-    float: right;
-    margin-right: 10px;
-  }
-  .header {
-    padding: 20px 0;
-  }
+<style lang="sass" scoped>
+.footer-page 
+  float: right
+  margin-right: 10px
+.header 
+  padding: 20px 0
+.copy 
+  cursor: pointer
+  
 </style>
 
