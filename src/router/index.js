@@ -18,7 +18,10 @@ export const constantRouterMap  = [
   { path: '/404', component: () => import('@/views/404'), hidden: true },
   { path: '/', name: '首页', component: Home, redirect: '/index', children: [
     { path: 'index', component: Home }
-  ] }
+  ] },
+  { path: '/canvasPan', component: CanvasPan },
+  { path: '/mavonEditor', component: MavonEditor },
+  { path: '/tuiEditor', component: TuiEditor }
 ]
 
 export default new Router({
