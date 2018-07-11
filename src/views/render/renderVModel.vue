@@ -2,9 +2,14 @@
 <template>
   <div style="margin: 20px">
     <Table highlight-row :columns="columns3" border :data="data1" size="small" ref="table"></Table>
+    <Tooltip content="点击复制到剪贴板" placement="bottom">
+      <p @click="copy($refs.copy)" class="copy" ref="copy">这是测试复制到剪贴板的指令</p>
+    </Tooltip>
   </div>
 </template>
 <script>
+import axios from 'axios'
+import test from '@/mock/test'
 export default {
   data () {
     return {
@@ -117,6 +122,31 @@ export default {
         { name: '司晓萌', sex: 2, switchSlot: false }
       ]
     }
+  },
+  mounted () {
+    // 测试mockjs
+    axios.get('www.baidu/api/data').then((res) => {
+      console.log(res, test)
+    })
+  },
+  methods: {
+    copy (el) {
+      var range = document.createRange();
+			var end = el.childNodes.length;
+			range.setStart(el,0);
+			range.setEnd(el,end);
+			var selection = window.getSelection();
+			selection.removeAllRanges();
+			selection.addRange(range);
+			document.execCommand("copy",false,null);
+			selection.removeRange(range);
+    }
   }
 }
 </script>
+<style scoped>
+  .copy {
+    cursor: pointer;
+  }
+</style>
+
