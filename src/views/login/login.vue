@@ -35,8 +35,8 @@ export default {
     }
     return {
       formLogin: {
-        user: "",
-        password: "",
+        user: "admin",
+        password: "123456",
         identify: ""
       },
       ruleLogin: {
@@ -56,7 +56,10 @@ export default {
     document.onkeydown = function(event) {
       event.keyCode === 13 && _this.login("formLogin")
     }
-    this.makeCode(this.identifyCodes, 4)
+    // 为快速登录  直接赋予初始值
+    this.makeCode(this.identifyCodes, 4).then((res) => {
+      this.formLogin.identify = res
+    })
   },
   methods: {
     login(name) {
@@ -78,11 +81,14 @@ export default {
       this.makeCode(this.identifyCodes, 4)
     },
     makeCode(o, l) {
-      for (let i = 0; i < l; i++) {
-        this.identifyCode += this.identifyCodes[
-          this.randomNum(0, this.identifyCodes.length)
-        ]
-      }
+      return new Promise((resolve, reject) => {
+        for (let i = 0; i < l; i++) {
+          this.identifyCode += this.identifyCodes[
+            this.randomNum(0, this.identifyCodes.length)
+          ]
+        }
+        resolve(this.identifyCode)
+      })
     }
   }
 };

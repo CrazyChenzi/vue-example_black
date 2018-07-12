@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>HTML5简单的画图</title>
+<style>
+	*{margin: 0; padding: 0;}
+canvas{ border:1px solid #000;position: absolute; top:0; left:0;}
+</style>
+</head>
+ 
+<body>
+<canvas id="myCanvas" width="1000" height="550"></canvas>
+ 
+<canvas id="myCanvas2" width="1000" height="550"></canvas>
+<script>
+var fou=false;
+	
+var canvas=document.getElementById("myCanvas");
+var cntx=canvas.getContext("2d");
+ 
+var canvas2=document.getElementById("myCanvas2");
+var cntx2=canvas2.getContext("2d");
+    //cntx2.globalAlpha=0.3;
+	cntx2.strokeStyle = "rgba(255,0,0,0.3)";
+	cntx2.lineWidth = "20";
+	cntx2.lineCap="round";
+	cntx2.lineJoin="round";	
+	
+canvas2.onmousedown=function(ev){
+var ev=ev || event;	
+cntx2.beginPath()
+cntx2.moveTo(ev.clientX-canvas2.offsetLeft,ev.clientY-canvas2.offsetTop);	
+fou=true;
+}
+ 
+ 
+canvas2.onmousemove=function(ev){
+	if(fou){
+var ev=ev || event;
+cntx2.lineTo(ev.clientX-canvas2.offsetLeft,ev.clientY-canvas2.offsetTop);
+cntx2.clearRect(0,0,canvas2.width,canvas2.height);
+cntx2.stroke();
+		
+}}
+ 
+canvas2.onmouseup=function(){
+cntx.drawImage(canvas2,0,0);
+cntx2.clearRect(0,0,canvas.width,canvas.height);
+fou=false;
+}
+ 
+canvas2.onmouseout=function(){
+cntx.drawImage(canvas2,0,0);
+cntx2.clearRect(0,0,canvas.width,canvas.height);
+fou=false;
+}
+</script>
+</body>
+</html>
