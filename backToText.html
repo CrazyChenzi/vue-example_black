@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>回文</title>
+</head>
+<body>
+  <script>
+    let a = 'race car'
+    let b = 'not a palindrome'
+    let c = 'A man, a plan, a canal. Panama'
+    let d = 'My age is 0, 0 si ega ym.'
+    let e = '0_0 (: /-\ :) 0-0'
+
+    function backText (params) {
+      console.log(params)
+      let length = parseInt(params.length/2)
+      for (let i = 0; i < length - 1; i++) {
+        console.log(params[i], params[params.length - 1 - i])
+        if (params[i] === params[params.length - 1 - i]) {
+          console.log(i , length)
+          if (i === length - 1) console.log('这是回文数')
+        } else {
+          break;
+        }
+      }
+    }
+    console.log(backText(d))
+  </script>
+</body>
+</html>
